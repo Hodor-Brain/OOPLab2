@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/medicines"
+        xmlns:tns="http://www.example.com/medicines"
+        elementFormDefault="qualified">
+    <element name="Medicines">
+        <complexType>
+            <sequence>
+                <element name="Medicine" type="tns:Medicine" minOccurs="1" maxOccurs="100"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Medicine">
+        <sequence>
+            <element name="id" type="ID"/>
+            <element name="name" type="string"/>
+            <element name="pharm" type="tns:Pharm"/>
+            <element name="analogs" type="string"/>
+            <element name="version" type="tns:Version"/>
+        </sequence>
+        <attribute name="group" use="optional" default="ANTIBIOTIC">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="ANTIBIOTIC"></enumeration>
+                    <enumeration value="PAINKILLER"></enumeration>
+                    <enumeration value="VITAMIN"></enumeration>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+    <simpleType name="Pharm">
+        <restriction base="NCName">
+            <pattern value="([A-Z])[a-zA-Z]{2,10}"/>
+        </restriction>
+    </simpleType>
+    <complexType name="Version">
+        <sequence>
+            <element name="consistence" type="string"/>
+            <element name="certificate" type="tns:Certificate"/>
+            <element name="package" type="tns:Package"/>
+            <element name="dosage" type="tns:Dosage"/>
+        </sequence>
+    </complexType>
+    <complexType name="Certificate">
+        <sequence>
+            <element name="number" type="string"/>
+            <element name="issuanceDate" type="date"/>
+            <element name="expirationDate" type="date"/>
+            <element name="organisation" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="Package">
+        <sequence>
+            <element name="type" type="string"/>
+            <element name="quantity" type="int"/>
+            <element name="price" type="float"/>
+        </sequence>
+    </complexType>
+    <complexType name="Dosage">
+        <sequence>
+            <element name="dose" type="float"/>
+            <element name="regularity" type="int"/>
+        </sequence>
+    </complexType>
+</schema>

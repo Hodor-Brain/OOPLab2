@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Medicines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.example.com/medicines"
+         xsi:schemaLocation="http://www.example.com/medicines medicines.xsd">
+    <Medicine group="ANTIBIOTIC">
+        <id>A1</id>
+        <name>Penicillin</name>
+        <pharm>Brovafarma</pharm>
+        <analogs>none</analogs>
+        <version>
+            <consistence>Pills</consistence>
+            <certificate>
+                <number>1A2B</number>
+                <issuanceDate>2019-07-21</issuanceDate>
+                <expirationDate>2024-07-21</expirationDate>
+                <organisation>BigAndHealthy</organisation>
+            </certificate>
+            <package>
+                <type>Plastic</type>
+                <quantity>24</quantity>
+                <price>109.5</price>
+            </package>
+            <dosage>
+                <dose>0.5</dose>
+                <regularity>2</regularity>
+            </dosage>
+        </version>
+    </Medicine>
+
+    <Medicine group="VITAMIN">
+        <id>A2</id>
+        <name>Magne-B6</name>
+        <pharm>VitToHuman</pharm>
+        <analogs>Magnemax</analogs>
+        <version>
+            <consistence>Powder</consistence>
+            <certificate>
+                <number>7C2D</number>
+                <issuanceDate>2020-09-19</issuanceDate>
+                <expirationDate>2023-09-19</expirationDate>
+                <organisation>BioNTech</organisation>
+            </certificate>
+            <package>
+                <type>Glass</type>
+                <quantity>40</quantity>
+                <price>246.5</price>
+            </package>
+            <dosage>
+                <dose>1.5</dose>
+                <regularity>1</regularity>
+            </dosage>
+        </version>
+    </Medicine>
+</Medicines>
