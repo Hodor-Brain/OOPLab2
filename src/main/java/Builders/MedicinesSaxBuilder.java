@@ -2,7 +2,6 @@ package Builders;
 
 import Medicine.Medicine;
 import Medicine.MedicineErrorHandler;
-import Medicine.MedicineHandler;
 import org.xml.sax.XMLReader;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.SAXParser;
@@ -25,11 +24,11 @@ public class MedicinesSaxBuilder extends AbstractMedicinesBuilder {
         try {
             SAXParser saxParser = factory.newSAXParser();
             reader = saxParser.getXMLReader();
+            reader.setErrorHandler(new MedicineErrorHandler());
+            reader.setContentHandler(handler);
         } catch (ParserConfigurationException | SAXException e) {
             e.printStackTrace(); // log
         }
-        reader.setErrorHandler(new MedicineErrorHandler());
-        reader.setContentHandler(handler);
     }
 
     public Set<Medicine> getMedicines() {
@@ -40,9 +39,9 @@ public class MedicinesSaxBuilder extends AbstractMedicinesBuilder {
     public void buildSetMedicines(String filename) {
         try {
             reader.parse(filename);
+            medicines = handler.getMedicines();
         } catch (IOException | SAXException e) {
             e.printStackTrace(); // log
         }
-        medicines = handler.getMedicines();
     }
 }

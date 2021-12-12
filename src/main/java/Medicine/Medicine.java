@@ -1,6 +1,8 @@
 package Medicine;
 
+import Builders.MedicinesDomBuilder;
 import Xml.MedicineXmlTag;
+import org.w3c.dom.Element;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -63,6 +65,37 @@ public class Medicine implements Comparable<Medicine>{
         this.group = group;
         this.analogs = analogs;
         this.version = version;
+    }
+
+    public Medicine(Element element){
+        this.group = Medicine.Group.valueOf(element.getAttribute("group"));
+        this.id = MedicinesDomBuilder.getElementTextContent(element, "id");
+        this.name = MedicinesDomBuilder.getElementTextContent(element, "name");
+        this.pharm = MedicinesDomBuilder.getElementTextContent(element, "pharm");
+        this.analogs = MedicinesDomBuilder.getElementTextContent(element, "analogs");
+
+        Element versionElement =
+                (Element) element.getElementsByTagName("version").item(0);
+
+        this.version.setConsistence(MedicinesDomBuilder.getElementTextContent(versionElement, "consistence"));
+
+        Element certificateElement = (Element) versionElement.getElementsByTagName("certificate").item(0);
+
+        this.version.certificate.setNumber(MedicinesDomBuilder.getElementTextContent(certificateElement, "number"));
+        this.version.certificate.setIssuanceDate(LocalDate.parse(MedicinesDomBuilder.getElementTextContent(certificateElement, "issuanceDate")));
+        this.version.certificate.setExpirationDate(LocalDate.parse(MedicinesDomBuilder.getElementTextContent(certificateElement, "expirationDate")));
+        this.version.certificate.setOrganisation(MedicinesDomBuilder.getElementTextContent(certificateElement, "organisation"));
+
+        Element packageElement = (Element) versionElement.getElementsByTagName("package").item(0);
+
+        this.version.pack.setType(MedicinesDomBuilder.getElementTextContent(packageElement, "type"));
+        this.version.pack.setPrice(Float.parseFloat(MedicinesDomBuilder.getElementTextContent(packageElement, "price")));
+        this.version.pack.setQuantity(Integer.parseInt(MedicinesDomBuilder.getElementTextContent(packageElement, "quantity")));
+
+        Element dosageElement = (Element) versionElement.getElementsByTagName("dosage").item(0);
+
+        this.version.dosage.setDose(Float.parseFloat(MedicinesDomBuilder.getElementTextContent(dosageElement, "dose")));
+        this.version.dosage.setRegularity(Integer.parseInt(MedicinesDomBuilder.getElementTextContent(dosageElement, "regularity")));
     }
 
     /**
@@ -649,7 +682,7 @@ public class Medicine implements Comparable<Medicine>{
      * @param value A string containing the value of field.
      * @param currentXmlTag A XML tag representing a field to initiate.
      */
-    public void initiateField(String value, MedicineXmlTag currentXmlTag){
+    public void setParameter(String value, MedicineXmlTag currentXmlTag){
         if(currentXmlTag!=null) {
             switch (currentXmlTag) {
                 case ID -> setId(value);

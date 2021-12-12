@@ -21,7 +21,6 @@ public class MedicineErrorHandler implements ErrorHandler {
         logger.fatal(getLineColumnNumber(e) + " - " + e.getMessage());
     }
     private String getLineColumnNumber(SAXParseException e) {
-        // determine line and position of error
         return e.getLineNumber() + " : " + e.getColumnNumber();
     }
 }

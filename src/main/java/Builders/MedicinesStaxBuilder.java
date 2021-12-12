@@ -67,7 +67,7 @@ public class MedicinesStaxBuilder extends AbstractMedicinesBuilder {
                     name = reader.getLocalName();
                     switch (MedicineXmlTag.valueOf(name.toUpperCase())) {
                         case VERSION -> medicine.setVersion(getXMLVersion(reader));
-                        default -> medicine.initiateField(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
+                        default -> medicine.setParameter(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
                     }
                 }
                 case XMLStreamConstants.END_ELEMENT -> {
@@ -95,7 +95,7 @@ public class MedicinesStaxBuilder extends AbstractMedicinesBuilder {
                         case CERTIFICATE -> medicine.getVersion().setCertificate(getXMLCertificate(reader));
                         case PACKAGE -> medicine.getVersion().setPack(getXMLPackage(reader));
                         case DOSAGE -> medicine.getVersion().setDosage(getXMLDosage(reader));
-                        default -> medicine.initiateField(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
+                        default -> medicine.setParameter(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
@@ -118,7 +118,7 @@ public class MedicinesStaxBuilder extends AbstractMedicinesBuilder {
             switch (type) {
                 case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
-                    medicine.initiateField(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
+                    medicine.setParameter(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
@@ -141,7 +141,7 @@ public class MedicinesStaxBuilder extends AbstractMedicinesBuilder {
             switch (type) {
                 case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
-                    medicine.initiateField(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
+                    medicine.setParameter(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
@@ -164,7 +164,7 @@ public class MedicinesStaxBuilder extends AbstractMedicinesBuilder {
             switch (type) {
                 case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
-                    medicine.initiateField(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
+                    medicine.setParameter(getXMLText(reader), MedicineXmlTag.valueOf(name.toUpperCase()));
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();

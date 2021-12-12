@@ -1,5 +1,6 @@
-package Medicine;
+package Builders;
 
+import Medicine.Medicine;
 import Xml.MedicineXmlTag;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -60,7 +61,7 @@ public class MedicineHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) {
         String data = new String(ch, start, length).strip();
         if (current != null)
-            current.initiateField(data, currentXmlTag);
+            current.setParameter(data, currentXmlTag);
         currentXmlTag = null;
     }
 }
